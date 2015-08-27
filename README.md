@@ -9,7 +9,7 @@ elements of the program through the use of dependency inversion. Information is 
 
 At its core, this framework resembles a basic MVP pattern design that can be found on countless tutorial websites. However, this particular framework brings a great many enhancements on top of that basic pattern, which will be enumerated below.
 
-#############################################################################################################
+-------------------------------------------------------------------------------------------------------
 
 PACKAGE AND CLASS BREAKDOWN
 
