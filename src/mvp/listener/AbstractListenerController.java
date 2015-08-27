@@ -3,9 +3,8 @@ package mvp.listener;
 import java.awt.event.ActionListener;
 
 import mvp.core.AbstractController;
+import mvp.core.PropertyChangeView;
 import net.jcip.annotations.ThreadSafe;
-import stockmarket.gui.ListenerView;
-import stockmarket.gui.PropertyChangeView;
 
 /**
  * Expanded version of <tt>AbstractController</tt>. Like its superclass,
@@ -41,8 +40,8 @@ import stockmarket.gui.PropertyChangeView;
  * 
  * @author Craig
  * @version 2.0
- * @see stockmarket.gui.ListenerView ListenerView
- * @see stockmarket.model.AbstractPropertyModel AbstractPropertyModel
+ * @see mvp.listener.ListenerView ListenerView
+ * @see mvp.core.AbstractPropertyModel AbstractPropertyModel
  */
 @ThreadSafe
 public abstract class AbstractListenerController 

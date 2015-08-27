@@ -26,8 +26,8 @@ import net.jcip.annotations.NotThreadSafe;
  * 
  * @author Craig
  * @version 2.0
- * @see stockmarket.model.AbstractPropertyModel AbstractPropertyModel
- * @see stockmarket.controller.AbstractController AbstractController
+ * @see mvp.core.AbstractPropertyModel AbstractPropertyModel
+ * @see mvp.core.AbstractController AbstractController
  *
  */
 @NotThreadSafe

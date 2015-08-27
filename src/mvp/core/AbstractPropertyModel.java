@@ -24,8 +24,8 @@ import net.jcip.annotations.ThreadSafe;
  * 
  * @author Craig
  * @version 2.0
- * @see stockmarket.gui.PropertyChangeView ControllableView
- * @see stockmarket.controller.AbstractController AbstractController
+ * @see mvp.core.PropertyChangeView ControllableView
+ * @see mvp.core.AbstractController AbstractController
  */
 @ThreadSafe
 public abstract class AbstractPropertyModel 

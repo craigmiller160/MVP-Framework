@@ -12,10 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
+import mvp.core.PropertyChangeView;
 import mvp.listener.AbstractListenerController;
+import mvp.listener.ListenerView;
 import net.jcip.annotations.ThreadSafe;
-import stockmarket.gui.ListenerView;
-import stockmarket.gui.PropertyChangeView;
 
 /**
  * A concurrent enhancement of the <tt>AbstractListenerController</tt>.
@@ -69,7 +69,7 @@ import stockmarket.gui.PropertyChangeView;
  * 
  * @author craig
  * @version 2.0
- * @see stockmarket.gui.ListenerView ListenerView
+ * @see mvp.listener.ListenerView ListenerView
  */
 @ThreadSafe
 public abstract class AbstractConcurrentListenerController 

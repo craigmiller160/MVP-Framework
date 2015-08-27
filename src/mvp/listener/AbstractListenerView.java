@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import stockmarket.gui.dialog.ListenerDialog;
+import mvp.core.PropertyChangeView;
 import net.jcip.annotations.NotThreadSafe;
 
 /**
@@ -48,9 +48,9 @@ import net.jcip.annotations.NotThreadSafe;
  * 
  * @author Craig
  * @version 2.0
- * @see stockmarket.controller.AbstractListenerController AbstractListenerController
- * @see stockmarket.model.AbstractPropertyModel AbstractPropertyModel
- * @see stockmarket.gui.ListenerDialog ListenerDialog
+ * @see mvp.listener.AbstractListenerController AbstractListenerController
+ * @see mvp.core.AbstractPropertyModel AbstractPropertyModel
+ * @see mvp.listener.ListenerDialog ListenerDialog
  */
 @NotThreadSafe
 public abstract class AbstractListenerView 

@@ -13,8 +13,6 @@ import java.util.List;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.Immutable;
 import net.jcip.annotations.ThreadSafe;
-import stockmarket.gui.PropertyChangeView;
-import stockmarket.model.AbstractPropertyModel;
 
 /**
  * Abstract controller class with the basic structure for managing
@@ -59,8 +57,8 @@ import stockmarket.model.AbstractPropertyModel;
  * 
  * @author Craig
  * @version 2.0
- * @see stockmarket.gui.PropertyChangeView PropertyChangeView
- * @see stockmarket.model.AbstractPropertyModel AbstractPropertyModel
+ * @see mvp.core.PropertyChangeView PropertyChangeView
+ * @see mvp.core.AbstractPropertyModel AbstractPropertyModel
  */
 @ThreadSafe
 public abstract class AbstractController 

@@ -34,6 +34,8 @@ import java.awt.event.ActionListener;
  * 
  * @author craig
  * @version 2.0
+ * @see mvp.listener.AbstractListenerController AbstractListenerController
+ * @see mvp.core.AbstractPropertyModel AbstractPropertyModel
  */
 public interface ListenerView 
 extends ActionListener{

@@ -1,6 +1,5 @@
 package mvp.listener;
 
-import stockmarket.gui.ListenerView;
 
 /**
  * Interface extending the <tt>ListenerView</tt> interface and
@@ -34,7 +33,7 @@ import stockmarket.gui.ListenerView;
  * 
  * @author craig
  * @version 2.0
- * TODO add a see for AbstractListenerController and AbstractListenerView
+ * @see mvp.listener.AbstractListenerView AbstractListenerView
  */
 public interface ListenerDialog extends ListenerView {
 
