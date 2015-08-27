@@ -1,4 +1,4 @@
-# MVP-Framework
+# MVP-FRAMEWORK
 
 PROJECT NAME: 
 Model-View-Presenter Framework
@@ -11,7 +11,7 @@ At its core, this framework resembles a basic MVP pattern design that can be fou
 
 -------------------------------------------------------------------------------------------------------
 
-PACKAGE AND CLASS BREAKDOWN
+# PACKAGE AND CLASS BREAKDOWN
 
 PACKAGE NAME: core
 
@@ -46,4 +46,4 @@ DESCRIPTION: Basic controller, with methods to add/remove models and views that 
 
 PACKAGE NAME: listener
 
-PACKAGE DESCRIPTION: A major enhancement over the core MVP, utilizing the ActionListener interface to provide an even greater level of de-coupling between the view and controller. 
+PACKAGE DESCRIPTION: A major enhancement over the core MVP, utilizing the ActionListener interface to provide an even greater level of de-coupling between the view and controller. Views and controllers now both implement the ActionListener interface, in order to facilitate the rapid passing of events from actionable components in the GUI to the controller. 
