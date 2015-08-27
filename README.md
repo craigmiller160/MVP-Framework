@@ -1,9 +1,9 @@
 # MVP-FRAMEWORK
 
-PROJECT NAME: 
+## PROJECT NAME: 
 Model-View-Presenter Framework
 
-PROJECT DESCRIPTION:
+### PROJECT DESCRIPTION:
 A re-usable abstract framework conforming to the Model-View-Presenter design pattern. The classes and interfaces in this project, when inherited by subclasses in a program, provide the skeleton for an easy implementation of this pattern. This framework is intended to provide the maximum amount of low-coupling between
 elements of the program through the use of dependency inversion. Information is passed between models, views, and controllers by means of the methods in the classes and interfaces in this framework, allowing them to exist in the program without needing any actual knowledge of each other.
 
@@ -13,7 +13,7 @@ At its core, this framework resembles a basic MVP pattern design that can be fou
 
 # PACKAGE AND CLASS BREAKDOWN
 
-PACKAGE NAME: core
+#### PACKAGE NAME: core
 
 PACKAGE DESCRIPTION: The core MVP classes for this framework. The classes in this package are primarily derived from the basic, commonly used MVP structure, but even they have several key enhancements.
 
