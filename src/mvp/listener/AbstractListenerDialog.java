@@ -1,4 +1,4 @@
-package listener;
+package mvp.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +35,16 @@ import java.util.List;
  * so views using this API will have to rely on composition (wrapping around
  * an instance of the GUI component their building) rather than inheritence
  * to create components.
+ * <p>
+ * <b>NOTE:</b> External listeners to receive <tt>ActionEvent</tt>s 
+ * should be added to instances of <tt>ListenerDialog</tt> before the
+ * <tt>showDialog()</tt> method is invoked. For maximum flexibility,
+ * <tt>AbstractListenerView</tt> has been designed to also serve
+ * as a listener for dialogs implementing this interface, in case
+ * the dialog is created within a GUI class and can't add the controller
+ * directly as an <tt>ActionListener</tt>. If <tt>AbstractListenerView</tt>
+ * receives an <tt>ActionEvent</tt> from this dialog, it will safely
+ * pass it along to the controller without changing its source.
  * <p>
  * <b>THREAD SAFETY:</b> Swing is NOT thread safe. All
  * methods in this class MUST be invoked on the <tt>EventDispatchThread</tt>.

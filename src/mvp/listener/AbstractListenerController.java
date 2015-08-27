@@ -1,8 +1,8 @@
-package listener;
+package mvp.listener;
 
 import java.awt.event.ActionListener;
 
-import core.AbstractController;
+import mvp.core.AbstractController;
 import net.jcip.annotations.ThreadSafe;
 import stockmarket.gui.ListenerView;
 import stockmarket.gui.PropertyChangeView;

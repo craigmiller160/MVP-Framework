@@ -1,4 +1,4 @@
-package core;
+package mvp.core;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -12,6 +12,9 @@ import net.jcip.annotations.ThreadSafe;
  * Subclasses should take care to follow JavaBean guidelines for maximum
  * effectiveness. Property names should be kept as constants to ensure consistency,
  * and setter and getter methods should be provided for all properties.
+ * <p>
+ * <b>NOTE:</b> All models extending this class should be added to
+ * the appropriate controller during the initialization of the program.
  * <p>
  * <b>THREAD SAFETY:</b> The <tt>firePropertyChangeEvent(String,Object,Object)</tt>
  * method should NEVER be invoked within a synchronized method or block. So long
@@ -67,6 +70,10 @@ implements Serializable{
 	
 	/**
 	 * Fires a property change event for a bound property of this model.
+	 * <p>
+	 * <b>THREAD SAFETY:</b> As is mentioned above, this method should NEVER 
+	 * be invoked from within a synchronized method or block, as this could
+	 * have unknowable consequences for liveness.
 	 * 
 	 * @param propertyName the name of the property.
 	 * @param oldValue the old value of the property.

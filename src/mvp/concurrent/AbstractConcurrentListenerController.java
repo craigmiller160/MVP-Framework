@@ -1,4 +1,4 @@
-package concurrent;
+package mvp.concurrent;
 
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
-import listener.AbstractListenerController;
+import mvp.listener.AbstractListenerController;
 import net.jcip.annotations.ThreadSafe;
 import stockmarket.gui.ListenerView;
 import stockmarket.gui.PropertyChangeView;
@@ -52,6 +52,14 @@ import stockmarket.gui.PropertyChangeView;
  * the views in <tt>SwingUtilities.invokeLater(Runnable) to
  * ensure that the event is only passed to the view on the 
  * EDT.
+ * <p>
+ * Lastly, the executor used by this class to manage the 
+ * thread pool is a protected field and available to subclasses.
+ * This is primarily done to allow for its threads to be used
+ * for other concurrent operations, avoiding the need to create
+ * additional thread pools. However, subclasses can determine
+ * if they wish to use the existing pool for this purpose,
+ * or if they would rather create additional pools instead.
  * <p>
  * <b>THREAD SAFETY:</b> This class is thread safe. The only
  * possible compromise to its safety would come from the
@@ -189,14 +197,15 @@ extends AbstractListenerController{
 	@Override
 	public final void actionPerformed(final ActionEvent event) {
 		Runnable eventTask = null;
+		final String actionCommand = event.getActionCommand();
 		if(event.getSource() instanceof ListenerView){
 			final Object valueFromView = ((ListenerView) event.getSource()).getValueForAction(
-					event.getActionCommand());
+					actionCommand);
 			
 			eventTask = new Runnable(){
 				@Override
 				public void run() {
-					processEvent(event, valueFromView);
+					processEvent(actionCommand, valueFromView);
 				}
 			};
 		}
@@ -204,7 +213,7 @@ extends AbstractListenerController{
 			eventTask = new Runnable(){
 				@Override
 				public void run(){
-					processEvent(event, null);
+					processEvent(actionCommand, null);
 				}
 			};
 		}
@@ -214,34 +223,26 @@ extends AbstractListenerController{
 	
 	/**
 	 * Process events passed from views and execute the appropriate
-	 * response to them on background threads. The event should be
-	 * parsed and executed appropriately, updating models and performing
-	 * other program actions as needed.
+	 * response to them on background threads. The event's action command
+	 * and any value(s) from the view that are necessary for execution
+	 * are provided as parameters.
 	 * <p>
 	 * Because of the concurrent nature of this class, this method
 	 * WILL be invoked from multiple threads. Therefore its 
 	 * implementation should use synchronization where necessary
 	 * to ensure concurrent access.
 	 * <p>
-	 * This method is NEVER invoked from the <tt>EventDispatchThread</tt>,
-	 * only from background worker threads. Because the <tt>ActionEvent</tt>
-	 * contains a reference to the GUI class that sent it via its
-	 * <tt>getSource()</tt> method, that method should NEVER be invoked
-	 * here, because it will compromise Swing thread safety.
-	 * <p>
-	 * Because of this, the <tt>getValueForAction(String)</tt> method
-	 * from <tt>ListenerView</tt> implementations is automatically
-	 * invoked in the <tt>actionPerformed(ActionEvent)</tt> method, 
-	 * and its value is passed to this method as the <tt>valueFromView</tt>
-	 * parameter. This is done automatically while still on the EDT, 
-	 * so that it does not need to be invoked here.
+	 * The <tt>getValueForAction(String)</tt> method from <tt>ListenerView</tt>
+	 * is invoked before this method is, and the <tt>valueFromView</tt>
+	 * parameter will contain any values provided by that method, or
+	 * null if none were.
 	 * 
-	 * @param event the <tt>ActionEvent</tt> to be parsed and executed.
+	 * @param actionCommand the action to be executed.
 	 * @param valueFromView the value returned by <tt>getValueForAction(String)</tt>
 	 * in the <tt>ListenerView</tt> interface. If no value is set to be returned
 	 * by the view that sent this event, this parameter will be <tt>null</tt>.
 	 */
-	protected abstract void processEvent(final ActionEvent event, 
+	protected abstract void processEvent(final String actionCommand, 
 			final Object valueFromView);
 	
 	/**
@@ -252,10 +253,10 @@ extends AbstractListenerController{
 	 * method is invoked. This ensures that the view classes will
 	 * have their single-thread-access guarantee protected.
 	 * 
-	 * @param event
+	 * @param event the <tt>PropertyChangeEvent</tt> to pass to the views.
 	 */
 	@Override
-	public void propertyChange(final PropertyChangeEvent event){
+	public final void propertyChange(final PropertyChangeEvent event){
 		synchronized(viewList){
 			for(final PropertyChangeView view : viewList){
 				SwingUtilities.invokeLater(new Runnable(){

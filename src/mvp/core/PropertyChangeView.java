@@ -1,4 +1,4 @@
-package core;
+package mvp.core;
 
 import java.beans.PropertyChangeEvent;
 
@@ -17,6 +17,9 @@ import net.jcip.annotations.NotThreadSafe;
  * <p>
  * Property name values should be constants stored in a single class.
  * This ensures consistency and avoids errors.
+ * <p>
+ * <b>NOTE:</b> All views implementing this interface should be added to
+ * the appropriate controller prior to the GUI being displayed.
  * <p>
  * <b>THREAD SAFETY:</b> Swing is NOT thread safe. All
  * methods in this class MUST be invoked on the <tt>EventDispatchThread</tt>.

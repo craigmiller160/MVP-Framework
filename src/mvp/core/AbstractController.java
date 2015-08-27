@@ -1,4 +1,4 @@
-package core;
+package mvp.core;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

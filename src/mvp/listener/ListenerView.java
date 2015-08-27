@@ -1,4 +1,4 @@
-package listener;
+package mvp.listener;
 
 import java.awt.event.ActionListener;
 
@@ -24,6 +24,9 @@ import java.awt.event.ActionListener;
  * the necessary value(s) based on the <tt>actionCommand</tt> parameter
  * passed to the method. <b>NOTE:</b> This works best when action command
  * values are set as constants.
+ * <p>
+ * <b>NOTE:</b> All views implementing this interface should be added to
+ * the appropriate controller prior to the GUI being displayed.
  * <p>
  * <b>THREAD SAFETY:</b> Swing is NOT thread safe. Since this interface
  * is intended to be used with Swing classes, its methods should

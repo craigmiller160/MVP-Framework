@@ -1,4 +1,4 @@
-package listener;
+package mvp.listener;
 
 import stockmarket.gui.ListenerView;
 
@@ -18,12 +18,23 @@ import stockmarket.gui.ListenerView;
  * with the modality of the dialog, and allow it to be
  * determined and changed if necessary.
  * <p>
+ * <b>NOTE:</b> External listeners to receive <tt>ActionEvent</tt>s 
+ * should be added to instances of <tt>ListenerDialog</tt> before the
+ * <tt>showDialog()</tt> method is invoked. For maximum flexibility,
+ * <tt>AbstractListenerView</tt> has been designed to also serve
+ * as a listener for dialogs implementing this interface, in case
+ * the dialog is created within a GUI class and can't add the controller
+ * directly as an <tt>ActionListener</tt>. If <tt>AbstractListenerView</tt>
+ * receives an <tt>ActionEvent</tt> from this dialog, it will safely
+ * pass it along to the controller without changing its source.
+ * <p>
  * <b>THREAD SAFETY:</b> Swing is NOT thread safe, and all operations
  * on the dialogs inheriting this interface must be done from the
  * <tt>EventDispatchThread</tt>
  * 
  * @author craig
  * @version 2.0
+ * TODO add a see for AbstractListenerController and AbstractListenerView
  */
 public interface ListenerDialog extends ListenerView {
 

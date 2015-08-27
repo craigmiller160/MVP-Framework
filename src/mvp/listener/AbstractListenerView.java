@@ -1,4 +1,4 @@
-package listener;
+package mvp.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +39,9 @@ import net.jcip.annotations.NotThreadSafe;
  * so views using this API will have to rely on composition (wrapping around
  * an instance of the GUI component their building) rather than inheritence
  * to create components.
+ * <p>
+ * <b>NOTE:</b> All views implementing this interface should be added to
+ * the appropriate controller prior to the GUI being displayed.
  * <p>
  * <b>THREAD SAFETY:</b> Swing is NOT thread safe. All
  * methods in this class MUST be invoked on the <tt>EventDispatchThread</tt>.
