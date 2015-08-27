@@ -51,7 +51,7 @@ import java.util.List;
  * 
  * @author craig
  * @version 2.0
- * @see mvp.core.AbstractListenerView AbstractListenerView
+ * @see mvp.listener.AbstractListenerView AbstractListenerView
  */
 public abstract class AbstractListenerDialog
 implements ListenerDialog {

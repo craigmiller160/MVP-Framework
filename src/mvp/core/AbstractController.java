@@ -170,6 +170,7 @@ implements PropertyChangeListener{
 	 * @param newParams the parameters to pass to the getter method. These are optional,
 	 * and the method will still run if no parameters are passed if the getter can accept
 	 * a no-argument invocation.
+	 * @return the return value of the method invoked.
 	 * @throws NoSuchMethodException if no matching getter method can be found.
 	 * if the application does not have access to invoke the method.
 	 * @throws IllegalAccessException if the application does not have access to invoke the method.

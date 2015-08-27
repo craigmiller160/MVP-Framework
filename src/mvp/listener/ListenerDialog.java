@@ -5,7 +5,7 @@ package mvp.listener;
  * Interface extending the <tt>ListenerView</tt> interface and
  * adding methods specifically intended for dialog implementations.
  * The main purpose of this interface is to allow dialogs to best
- * utilize the <ttListenerView</tt> API, and so the documentations
+ * utilize the <tt>ListenerView</tt> API, and so the documentations
  * for that super-interface should be consulted before implementing
  * this interface.
  * <p>

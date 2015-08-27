@@ -49,7 +49,7 @@ import net.jcip.annotations.ThreadSafe;
  * while on the background thread when a bound property is 
  * changed in one of the models. It safely wraps the 
  * <tt>changeProperty(PropertyChangeEvent)</tt> methods from
- * the views in <tt>SwingUtilities.invokeLater(Runnable) to
+ * the views in <tt>SwingUtilities.invokeLater(Runnable)</tt> to
  * ensure that the event is only passed to the view on the 
  * EDT.
  * <p>
