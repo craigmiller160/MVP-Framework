@@ -44,6 +44,8 @@ TYPE: Abstract Class
 DESCRIPTION: Basic controller, with methods to add/remove models and views that implement  
 			 AbstractPropertyModel and PropertyChangeView respectively. Proper synchronization is used when adding/removing/iterating over the lists of these models and views. In addition, the powerful reflective methods setModelProperty(String,Object...) and getModelProperty(String,Object...) are provided, which are capable of invoking any setter or getter method in any of the models. Lastly, this class implements the PropertyChangeListener interface, and adds itself as a listener on any of the property models added to it. When a PropertyChangeEvent is received, it is automatically passed to all registered views, so they can parse it and decide if a response is needed.
 
+-----------------------------------------------------------------------------------------------------------
+			 
 PACKAGE NAME: listener
 
 PACKAGE DESCRIPTION: A major enhancement over the core MVP, utilizing the ActionListener interface to provide an even greater level of de-coupling between the view and controller. Views and controllers now both implement the ActionListener interface, in order to facilitate the rapid passing of events from actionable components in the GUI to the controller. 
