@@ -41,7 +41,7 @@ implements Serializable{
 	 * <p>
 	 * <tt>PropertyChangeSupport</tt> is thread-safe.
 	 */
-	protected final PropertyChangeSupport propertyChangeSupport;
+	private final PropertyChangeSupport propertyChangeSupport;
 	
 	/**
 	 * Creates a new model with a property change support object linked to it.
