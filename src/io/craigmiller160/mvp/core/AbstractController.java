@@ -32,6 +32,12 @@ import net.jcip.annotations.ThreadSafe;
  * allows subclasses to modify the models assigned to this controller
  * without needing any direct knowledge of their implementation.
  * <p>
+ * As of Version 2.1, a third reflective method, <tt>invokeModelMethod(String,Object...)</tt>
+ * has been provided. This method provides additional reflective method 
+ * invoking by not being limited to the setter/getter method naming
+ * convention. This provides additional functionality for abstractly
+ * interacting with the property models.
+ * <p>
  * The only restriction on these two methods is they will only
  * successfully invoke a method that matches the name and parameters
  * provided once. If more than one matching method exists across the instances
@@ -152,7 +158,7 @@ implements PropertyChangeListener{
 	 * or if the reflective method is unable to successfully invoke the 
 	 * method, the appropriate exception will be thrown.
 	 * <p>
-	 * This method is capable of reflectively invoking ANY method provided to it, 
+	 * This method is capable of reflectively invoking ANY getter method provided to it, 
 	 * so long as that method is public and matches the types of the parameters
 	 * submitted here. However, if multiple methods that would invoke successfully 
 	 * are provided in the list, this method will only end up invoking one of them. 
@@ -217,7 +223,7 @@ implements PropertyChangeListener{
 	 * or if the reflective method is unable to successfully invoke the 
 	 * method, the appropriate exception will be thrown.
 	 * <p>
-	 * This method is capable of reflectively invoking ANY method provided to it, 
+	 * This method is capable of reflectively invoking ANY setter method provided to it, 
 	 * so long as that method is public and matches the types of the parameters
 	 * submitted here. However, if multiple methods that would invoke successfully 
 	 * are provided in the list, this method will only end up invoking one of them. 
@@ -270,6 +276,67 @@ implements PropertyChangeListener{
 		//Run the reflectMethod to invoke the setter method
 		reflectMethod(matchingMethods, newParams);
 		
+	}
+	
+	/**
+	 * A reflective method for invoking methods in models that don't utilize
+	 * the JavaBean setter and getter method naming conventions. This method
+	 * requires passing the full method name, case sensitive, as the first 
+	 * parameter, in order to find the appropriate method. It will then attempt
+	 * to execute any matching methods using the same process as the reflective
+	 * setter and getter methods, returning one of several exceptions if the
+	 * process is unsuccessful.
+	 * <p>
+	 * This method is capable of reflectively invoking ANY method provided to it, 
+	 * so long as that method is public and matches the types of the parameters
+	 * submitted here. However, if multiple methods that would invoke successfully 
+	 * are provided in the list, this method will only end up invoking one of them. 
+	 * Multiple invocations risk interfering with the consistency of the operation,
+	 * and therefore this method ends after the first successful invocation
+	 * even if there are other methods remaining to test.
+	 * <p>
+	 * The order of the methods is affected by the order models were added
+	 * to this controller, but ultimately the order they are tested in cannot
+	 * be completely guaranteed. As such, it is highly recommended to keep 
+	 * method names across all the models added to this controller unique,
+	 * thus avoiding this issue. 
+	 * 
+	 * @param methodName the full name, case sensitive, of the method.
+	 * @param newParams the parameters to pass to the setter method. These are optional,
+	 * and the method will still run if no parameters are passed if the method can accept
+	 * a no-argument invocation.
+	 * @return the method's return value, or null if it has no return value.
+	 *  @throws NoSuchMethodException if no matching setter method can be found.
+	 * if the application does not have access to invoke the method.
+	 * @throws IllegalAccessException if the application does not have access to invoke the method.
+	 * @throws IllegalArgumentException if any or all of the parameters submitted do not match
+	 * what is required for any of the potential methods.
+	 * @throws ReflectiveOperationException if an unknown problem prevents this reflective
+	 * operation from completing successfully.
+	 * @throws Exception if a checked exception is thrown when a matching method is successfully
+	 * invoked. 
+	 * @throws RuntimeException if an unchecked exception is thrown when a matching method is
+	 * successfully invoked.
+	 * @throws Error if an error is thrown when a matching method is successfully invoked.
+	 */
+	protected final Object invokeModelMethod(String methodName, Object...newParams) 
+			throws NoSuchMethodException, IllegalAccessException, ReflectiveOperationException, Exception{
+		//Search for matching methods and creating a list of 
+		//ModelMethod objects to store them
+		List<ModelMethod> matchingMethods = new ArrayList<>();
+		synchronized(modelList){
+			for(AbstractPropertyModel model : modelList){
+				matchingMethods.addAll(getMatchingSignatureMethods(methodName, model));
+			}
+		}
+		
+		//If no matches have been found, throw exception
+		if(matchingMethods.size() == 0){
+			throw new NoSuchMethodException(methodName + " " + newParams);
+		}
+		
+		//Run the reflectMethod to invoke the setter method
+		return reflectMethod(matchingMethods, newParams);
 	}
 	
 	/**
