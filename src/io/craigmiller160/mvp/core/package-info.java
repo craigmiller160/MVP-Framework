@@ -18,6 +18,6 @@
  * properly.
  * 
  * @author craig
- * @version 2.0
+ * @version 2.1
  */
 package io.craigmiller160.mvp.core;
